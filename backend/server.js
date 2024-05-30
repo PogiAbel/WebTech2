@@ -1,6 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const axios = require('axios');
-const jsdom = require('jsdom');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
  
@@ -18,37 +16,44 @@ const client = new MongoClient(mongoURI, {
  
 app.listen(3000, async () =>{
   await client.connect();
-  console.log('Server is running on port 3000');
+  console.log('Server is running on port 3000: http://localhost:3000');
  
 });
  
 app.get('/movies', async (req, res) => {
-  const movies = await client.db("sample_mflix").collection("movies").find().limit(10).toArray();
-  res.json(movies);
+  let title = req.query.title;
+  try {
+    const movies = await client.db("sample_mflix").collection("movies").find({title:{$regex: title}}).limit(10).toArray();
+    res.json(movies);
+  } catch (error) {
+    res.json({'error': error});
+  }
 });
 
 app.get('/comments', async (req, res) => {
   try {
-    const comments = await client.db("sample_mflix").collection("comments").find().limit(10).toArray();
+    let movie_id = req.query.mID;
+    let comments;
+
+    if (!movie_id) {
+      res.json({'error': 'movie_id is required'});
+      return;
+    }else{
+      let mid = new ObjectId(movie_id);
+      comments = await client.db("sample_mflix").collection("comments").find({movie_id:mid}).limit(10).toArray();
+    }
     res.json(comments);
   } catch (error) {
     console.log(error);
+    res.json({'error': error});
   }
 });
- 
- 
-async function run() {
+
+app.get('/theater', async (req, res) => {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    let mov = await client.db("sample_mflix").collection("movies").find(
-        { title: "The Great Train Robbery" }
-    ).limit(1).toArray();
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    console.log(mov);
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+    let theaters = await client.db("sample_mflix").collection("theaters").find().limit(10).toArray();
+  } catch (error) {
+    console.log(error);
+    res.json({'error': error});
   }
-}
+});
