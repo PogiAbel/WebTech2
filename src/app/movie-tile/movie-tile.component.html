@@ -3,7 +3,7 @@
     <div class="card-body">
         <h5 class="card-title">{{movie.title}}</h5>
         <p class="card-text">{{movie.year}}</p>
-        <!-- <a [routerLink]="['/movie', movie.id]" class="btn btn-primary">Details</a> -->
+        <p class="card-text">{{movie._id}}</p>
+        <button [routerLink]="['/movie', movie._id]" class="btn btn-primary">Details</button>
     </div>
-    
 </div>

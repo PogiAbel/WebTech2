@@ -15,7 +15,7 @@ import { MovieComponent } from '../movie/movie.component';
           <nav>
               <ul>
                   <li><a href="#">Home</a></li>
-                  <li><a href="/movie">Movies</a></li>
+                  <li><a href="/movies">Movies</a></li>
                   <li><a href="#">Genres</a></li>
                   <li><a href="#">Contact</a></li>
               </ul>

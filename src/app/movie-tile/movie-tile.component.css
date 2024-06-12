@@ -1,0 +1,26 @@
+.card{
+    display: flex;
+    flex-direction: row;
+    margin: 5rem;
+    padding: 2rem;
+    border: 1px solid #000;
+    background-color: azure;
+    box-shadow: 2px 2px 2px 2px #000;
+    justify-content: space-between;
+}
+
+.card-img-top {
+  height: 400px;
+  object-fit: cover;
+  flex: 2;
+
+  border: 3px solid #b9630079;
+}
+
+.card-body{
+    flex: 3;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

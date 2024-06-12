@@ -1,5 +1,5 @@
 export interface MovieData {
-    id: string;
+    _id: string;
     plot: string;
     genres: string[];
     runtime: number;

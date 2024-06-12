@@ -22,6 +22,21 @@ app.listen(3000, async () =>{
  
 app.get('/movies', async (req, res) => {
   let title = req.query.title;
+  let id = req.query.id;
+  if (!title && !id) {
+    res.json({'error': 'title or id is required'});
+    return;
+  }
+  else if (id) {
+    try {
+      let _id = new ObjectId(id);
+      let movie = await client.db("sample_mflix").collection("movies").findOne({_id});
+      res.json(movie);
+    } catch (error) {
+      res.json({'error': error});
+    }
+    return;
+  }
   try {
     const movies = await client.db("sample_mflix").collection("movies").find({title:{$regex: title}}).limit(10).toArray();
     res.json(movies);
