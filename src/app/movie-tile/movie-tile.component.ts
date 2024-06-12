@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import {MovieData} from '../interfaces';
 
 @Component({
   selector: 'app-movie-tile',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './movie-tile.component.css'
 })
 export class MovieTileComponent {
+  @Input() movie!: MovieData;
 
+  ngOnInit(){
+    
+  }
 }

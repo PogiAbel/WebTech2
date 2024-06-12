@@ -1,1 +1,9 @@
-<p>movie-tile works!</p>
+<div class="card">
+    <img class="card-img-top" [src]="movie.poster" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{movie.title}}</h5>
+        <p class="card-text">{{movie.year}}</p>
+        <!-- <a [routerLink]="['/movie', movie.id]" class="btn btn-primary">Details</a> -->
+    </div>
+    
+</div>

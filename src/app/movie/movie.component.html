@@ -1,2 +1,8 @@
 <p>movie works!</p>
-<div *ngIf="loaded">{{getData()}}</div>
+<div *ngIf="loaded">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let movie of movies">
+            <app-movie-tile [movie]="movie"></app-movie-tile>
+        </div>
+    </div>
+</div>
