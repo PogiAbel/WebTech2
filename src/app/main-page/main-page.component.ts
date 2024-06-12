@@ -3,16 +3,6 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { MovieComponent } from '../movie/movie.component';
 
-async function api<T>(url: string): Promise<T> {
-  return fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(response.statusText)
-      }
-      return response.json() as Promise<T>
-    })
-}
-
 
 @Component({
   selector: 'app-root',
@@ -25,7 +15,7 @@ async function api<T>(url: string): Promise<T> {
           <nav>
               <ul>
                   <li><a href="#">Home</a></li>
-                  <li><a href="#">Movies</a></li>
+                  <li><a href="/movie">Movies</a></li>
                   <li><a href="#">Genres</a></li>
                   <li><a href="#">Contact</a></li>
               </ul>

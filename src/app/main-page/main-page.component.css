@@ -31,47 +31,6 @@ nav ul li a {
     text-decoration: none;
 }
 
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: url("https://github.com/sjvarnum/acme-media-showcase/blob/master/img/showcase.jpg?raw=true") no-repeat center center/cover;   
-}
-
-.wrapper::after{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow: inset 120px 100px 250px #000000, inset -120px -100px 250px #000000;
-}
-
-.hero {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: #fff;
-}
-
-
-.btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #ff6f61;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    position: relative;
-    z-index: 2;
-}
-
-.btn:hover {
-    background: #ff4c3b;
-}
-
 footer {
     background: #333;
     color: #fff;
@@ -84,4 +43,6 @@ footer p {
     margin: 0;
 }
 
-  
+.content{
+    height: 100vh;
+}
