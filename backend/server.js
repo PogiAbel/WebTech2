@@ -5,6 +5,8 @@ const cors = require('cors');
 const mongoURI = `mongodb+srv://new-user1:shishi11@cluster0.f5daxyc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const app = express();
 app.use(cors());
+const min = 10;
+let limit = min;
  
 const client = new MongoClient(mongoURI, {
   serverApi: {
@@ -23,11 +25,22 @@ app.listen(3000, async () =>{
 app.get('/movies', async (req, res) => {
   let title = req.query.title;
   let id = req.query.id;
+  let more = req.query.more;
+
+  // load more movies
+  if (more) {
+    limit += min;
+  } else {
+    limit = min;
+  }
+
+  // intial load
   if (!title && !id) {
-    res.json({'error': 'title or id is required'});
+    let movie = await client.db("sample_mflix").collection("movies").find().limit(limit).toArray();
+    res.json(movie);
     return;
   }
-  else if (id) {
+  else if (id) { // get movie by id
     try {
       let _id = new ObjectId(id);
       let movie = await client.db("sample_mflix").collection("movies").findOne({_id});
@@ -37,8 +50,8 @@ app.get('/movies', async (req, res) => {
     }
     return;
   }
-  try {
-    const movies = await client.db("sample_mflix").collection("movies").find({title:{$regex: title}}).limit(10).toArray();
+  try { // search movie by title
+    const movies = await client.db("sample_mflix").collection("movies").find({title:{$regex: title}}).limit(limit).toArray();
     res.json(movies);
   } catch (error) {
     res.json({'error': error});

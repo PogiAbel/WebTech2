@@ -24,14 +24,51 @@ async function api<JSON>(url: string): Promise<JSON> {
 })
 
 export class MovieComponent {
-  public movies!: MovieData[];
+  private movies!: MovieData[];
   public loaded: boolean = false;
+
   ngOnInit() {
-    api('http://localhost:3000/movies?title=nig').then(data =>{
+    api('http://localhost:3000/movies').then(data =>{
       this.movies = JSON.parse(JSON.stringify(data));
       
       this.loaded = true;
     });
+  }
 
+  searchMovie(title: string){
+    try {
+      api(`http://localhost:3000/movies?title=${title}`).then(data =>{
+        this.movies = JSON.parse(JSON.stringify(data));
+        
+        this.loaded = true;
+      });
+    } catch (error) {
+      window.alert('Error searching for movies');
+      console.log(error);
+    }
+
+  }
+
+  loadMore(title: string){
+    try {
+      api(`http://localhost:3000/movies?title=${title}&more=true`).then(data =>{
+        this.movies = JSON.parse(JSON.stringify(data));
+        
+        this.loaded = true;
+      });
+    } catch (error) {
+      window.alert('Error loading more movies');
+      console.log(error);
+    }
+  
+  }
+
+  getMovies(){
+    if(!this.loaded) return [];
+    return this.movies;
+  }
+  getMoviesLength(){
+    if(!this.loaded) return [];
+    return this.movies.length;
   }
 }

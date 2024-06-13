@@ -1,8 +1,17 @@
-<p>movie works!</p>
-<div *ngIf="loaded">
+<section class="search-bar">
+    <form>
+      <input type="text" placeholder="Search title" id="tilteSearch" name="titleSearch" #titleSearch />
+      <button class="primary" type="button" (click)="searchMovie(titleSearch.value)">Search</button>
+    </form>
+</section>
+<div *ngIf="loaded" class="movieList">
     <div class="row">
-        <div class="col-md-4" *ngFor="let movie of movies">
+        <div class="col-md-4" *ngFor="let movie of getMovies()">
             <app-movie-tile [movie]="movie"></app-movie-tile>
         </div>
     </div>
+    <button type="button" (click)="loadMore(titleSearch.value)" class="loadMoreButton">Load more</button>
+</div>
+<div *ngIf="getMoviesLength() == 0">
+    <h2>No movies found with these filters</h2>
 </div>
