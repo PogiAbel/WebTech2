@@ -51,7 +51,7 @@ app.get('/movies', async (req, res) => {
     return;
   }
   try { // search movie by title
-    const movies = await client.db("sample_mflix").collection("movies").find({title:{$regex: title}}).limit(limit).toArray();
+    const movies = await client.db("sample_mflix").collection("movies").find({title:{$regex: title, $options: "i"}}).limit(limit).toArray();
     res.json(movies);
   } catch (error) {
     res.json({'error': error});
@@ -60,7 +60,7 @@ app.get('/movies', async (req, res) => {
 
 app.get('/comments', async (req, res) => {
   try {
-    let movie_id = req.query.mID;
+    let movie_id = req.query.movie_id;
     let comments;
 
     if (!movie_id) {
@@ -69,8 +69,8 @@ app.get('/comments', async (req, res) => {
     }else{
       let mid = new ObjectId(movie_id);
       comments = await client.db("sample_mflix").collection("comments").find({movie_id:mid}).limit(10).toArray();
+      res.json(comments);
     }
-    res.json(comments);
   } catch (error) {
     console.log(error);
     res.json({'error': error});
