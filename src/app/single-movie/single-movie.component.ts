@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieData } from '../interfaces';
+import { MovieData, Comment } from '../interfaces';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CommentTileComponent } from '../comment-tile/comment-tile.component';
 
 async function api<JSON>(url: string): Promise<JSON> {
   return fetch(url)
@@ -15,12 +17,14 @@ async function api<JSON>(url: string): Promise<JSON> {
 @Component({
   selector: 'app-single-movie',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, CommentTileComponent],
   templateUrl: './single-movie.component.html',
   styleUrl: './single-movie.component.css'
 })
 export class SingleMovieComponent implements OnInit{
-  private movieData!: MovieData;
+  public movie!: MovieData;
+  public comments!: Comment[];
+  public loaded: boolean = false;
   private id!: string;
 
   constructor(private route: ActivatedRoute) {}
@@ -28,14 +32,18 @@ export class SingleMovieComponent implements OnInit{
   ngOnInit(){
     this.id = this.route.snapshot.paramMap.get('id')!;
     
-    
-    api<MovieData>(`http://localhost:3000/movies?id=${this.id}`).then(data => {
-      this.movieData = data
-      console.log(JSON.stringify(this.movieData));
-    });
-  }
+    try {
+      api<MovieData>(`http://localhost:3000/movies?id=${this.id}`).then(data => {
+        this.movie = data
+        this.loaded = true;
+      });
 
-  getData() {
-    return JSON.stringify(this.movieData);
+      api<Comment[]>(`http://localhost:3000/comments?movie_id=${this.id}`).then(data => {
+        this.comments = data;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 }

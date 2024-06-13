@@ -1,2 +1,71 @@
-<p>single-movie works!</p>
-<p>{{getData()}}</p>
+<div *ngIf="loaded">
+  <div class="movie-card">
+    <img
+      class="movie-poster"
+      [src]="movie.poster"
+      alt="{{ movie.title }} Poster"
+    />
+    <div class="movie-details">
+      <h1>{{ movie.title }}</h1>
+      <p *ngIf="movie.year"><strong>Year:</strong> {{ movie.year }}</p>
+      <p *ngIf="movie.rated"><strong>Rated:</strong> {{ movie.rated }}</p>
+      <p *ngIf="movie.runtime">
+        <strong>Runtime:</strong> {{ movie.runtime }} minutes
+      </p>
+      <p *ngIf="movie.genres?.length">
+        <strong>Genres:</strong> {{ movie.genres.join(", ") }}
+      </p>
+      <p *ngIf="movie.plot"><strong>Plot:</strong> {{ movie.plot }}</p>
+      <p *ngIf="movie.fullplot">
+        <strong>Full Plot:</strong> {{ movie.fullplot }}
+      </p>
+      <p *ngIf="movie.languages?.length">
+        <strong>Languages:</strong> {{ movie.languages.join(", ") }}
+      </p>
+      <p *ngIf="movie.released">
+        <strong>Released:</strong> {{ movie.released | date }}
+      </p>
+      <p *ngIf="movie.directors?.length">
+        <strong>Directors:</strong> {{ movie.directors.join(", ") }}
+      </p>
+      <p *ngIf="movie.writers?.length">
+        <strong>Writers:</strong> {{ movie.writers.join(", ") }}
+      </p>
+      <p *ngIf="movie.cast?.length">
+        <strong>Cast:</strong> {{ movie.cast.join(", ") }}
+      </p>
+      <p *ngIf="movie.awards?.text">
+        <strong>Awards:</strong> {{ movie.awards.text }}
+      </p>
+      <p *ngIf="movie.num_mflix_comments">
+        <strong>Number of Mflix Comments:</strong>
+        {{ movie.num_mflix_comments }}
+      </p>
+      <p *ngIf="movie.imdb?.rating">
+        <strong>IMDB Rating:</strong> {{ movie.imdb.rating }} ({{
+          movie.imdb.votes
+        }}
+        votes)
+      </p>
+      <p *ngIf="movie.countries?.length">
+        <strong>Countries:</strong> {{ movie.countries.join(", ") }}
+      </p>
+      <p *ngIf="movie.type"><strong>Type:</strong> {{ movie.type }}</p>
+      <p *ngIf="movie.tomatoes?.viewer?.meter">
+        <strong>Tomatometer:</strong> {{ movie.tomatoes.viewer.meter }}% ({{
+          movie.tomatoes.viewer.numReviews
+        }}
+        reviews)
+      </p>
+      <p *ngIf="movie.tomatoes?.lastUpdated">
+        <strong>Last Updated:</strong> {{ movie.tomatoes.lastUpdated | date }}
+      </p>
+    </div>
+  </div>
+
+  <div class="commentSection">
+    <div *ngFor="let comment of comments">
+        <app-comment-tile [comment]="comment"></app-comment-tile>
+    </div>
+  </div>
+</div>

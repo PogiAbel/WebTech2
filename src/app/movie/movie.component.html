@@ -4,7 +4,7 @@
       <button class="primary" type="button" (click)="searchMovie(titleSearch.value)">Search</button>
     </form>
 </section>
-<div *ngIf="loaded" class="movieList">
+<div *ngIf="loaded && getMoviesLength() != 0" class="movieList">
     <div class="row">
         <div class="col-md-4" *ngFor="let movie of getMovies()">
             <app-movie-tile [movie]="movie"></app-movie-tile>

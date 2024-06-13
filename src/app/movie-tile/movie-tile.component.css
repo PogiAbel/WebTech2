@@ -53,6 +53,11 @@
   color: #1f1f1f;
 }
 
+.card-genres {
+  margin: 1rem;
+}
+
+
 .btn {
   align-self: middle;
   padding: 0.5rem 1rem;

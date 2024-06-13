@@ -4,6 +4,7 @@
         <h5 class="card-title">{{movie.title}}</h5>
         <p class="card-text">{{movie.year}}</p>
         <p class="card-text card-plot">{{movie.plot}}</p>
+        <p class="card-genres">{{movie.genres}}</p>
         <button [routerLink]="['/movie', movie._id]" class="btn btn-primary">Details</button>
     </div>
 </div>
