@@ -1,19 +1,22 @@
-<header>
-    <div class="container">
-        <h1>Movie Database</h1>
+<div class="root">
+    <header>
+        <div class="container">
+            <h1>Movie Database</h1>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Movies</a></li>
-                <li><a href="#">Genres</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+            <li><a href="/movies">Movies</a></li>
+        <li><a href="/login">Login</a></li>
+    </ul>
+    </nav>
     </div>
-</header>
-
-<footer>
-    <div class="container">
-        <p>&copy; 2024 Movie Database. All rights reserved.</p>
-    </div>
-</footer>
+    </header>
+    <section class="content">
+        <router-outlet></router-outlet>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Movie Database. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
