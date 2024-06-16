@@ -1,4 +1,4 @@
-<div *ngIf="loaded">
+<div *ngIf="loaded" class="wrapper">
   <div class="movie-card">
     <img
       class="movie-poster"
@@ -61,6 +61,13 @@
         <strong>Last Updated:</strong> {{ movie.tomatoes.lastUpdated | date }}
       </p>
     </div>
+  </div>
+
+  <div class="newComment" *ngIf="isLoggedIn">
+    <div class="comment-container">
+      <textarea placeholder="Write a comment..." [(ngModel)]="newCommentText"></textarea>
+      <button (click)="submitComment()">Submit</button>
+  </div>
   </div>
 
   <div class="commentSection">

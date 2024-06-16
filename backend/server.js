@@ -89,12 +89,36 @@ app.get('/user', async (req, res) => {
     } else {
       let user = await client.db("sample_mflix").collection("users").findOne({email: email, password: password});
       if(user == null){ res.json(null); return;}
-      
+
       let response = {
         _id: user._id,
         email: user.email,
         name: user.name,
       }
+      res.json(response);
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({'error': error});
+  }
+});
+
+app.post('/comments', async (req, res) => {
+  try {
+    let movie_id = req.query.movie_id;
+    let user_id = req.query.user_id;
+    let comment = req.query.comment;
+    let userName = req.query.userName;
+    let userEmail = req.query.userEmail;
+    let date = new Date();
+    let mid = new ObjectId(movie_id);
+
+    if (!movie_id || !userName || !comment) {
+      res.json({'error': 'movie_id, user_id and comment are required'});
+      return;
+    } else {
+      let response = await client.db("sample_mflix").collection("comments").insertOne({name: userName,email: userEmail,movie_id: mid,text: comment,date:date});
+      console.log(response);
       res.json(response);
     }
   } catch (error) {

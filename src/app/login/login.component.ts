@@ -40,7 +40,6 @@ export class LoginComponent {
       }
     } catch (error){
     }
-    console.log("nginit " + this.cookieService.get('user'));
   }
 
   login() {
