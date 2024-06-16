@@ -1,0 +1,25 @@
+<div *ngIf="!login">
+    <div class="login-container">
+        <div class="login-form">
+          <h2>Login</h2>
+          <form>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn-login">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+</div>
+
+<div *ngIf="login">
+    <p>Logged in</p>
+</div>
