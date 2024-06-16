@@ -46,13 +46,8 @@ export interface Comment{
   date: Date;
 }
 
-export class Login{
-  private username: string;
-  private email: string;
-
-  constructor(username: string, email: string){
-    this.username = username;
-    this.email = email;
-  };
-
+export interface Login{
+  _id: string;
+  name: string ;
+  email: string ;
 }

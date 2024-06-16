@@ -77,9 +77,26 @@ app.get('/comments', async (req, res) => {
   }
 });
 
-app.get('/theater', async (req, res) => {
+app.get('/user', async (req, res) => {
   try {
-    let theaters = await client.db("sample_mflix").collection("theaters").find().limit(10).toArray();
+    let email = req.query.email;
+    let password = req.query.password;
+    let result;
+
+    if (!email || !password) {
+      res.json(null);
+      return;
+    } else {
+      let user = await client.db("sample_mflix").collection("users").findOne({email: email, password: password});
+      if(user == null){ res.json(null); return;}
+      
+      let response = {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+      }
+      res.json(response);
+    }
   } catch (error) {
     console.log(error);
     res.json({'error': error});

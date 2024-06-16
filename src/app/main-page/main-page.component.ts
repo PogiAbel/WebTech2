@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { MovieComponent } from '../movie/movie.component';
-import { Login } from '../interfaces';
 
 
 @Component({
@@ -14,6 +13,4 @@ import { Login } from '../interfaces';
 })
 export class MainPageComponent {
   title = 'beadando';
-
-  private login!: Login;
 }
