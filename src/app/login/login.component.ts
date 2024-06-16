@@ -25,7 +25,7 @@ export class LoginComponent {
   public email!: string;
   public password!: string;
 
-  public user!: Login;
+  public user!: Login | null;
 
   public error: boolean = false;
   public isLoggedIn: boolean = false;
@@ -53,13 +53,19 @@ export class LoginComponent {
         
         this.cookieService.set('user', JSON.stringify(user));
         this.getUser();
-        
+
         this.isLoggedIn = true;
       }
       else{
         this.error = true;
       }
     });
+  }
+
+  logout(){
+    this.cookieService.delete('user');
+    this.isLoggedIn = false;
+    this.user = null;
   }
 
   getUser(){

@@ -2,26 +2,34 @@
   <div class="login-container">
     <div class="login-form">
       <h2>Login</h2>
-      <form (ngSubmit)="login()">
+      <form (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm">
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" [(ngModel)]="email" name="email" required>
+          <input type="email" id="email" [(ngModel)]="email" name="email" required #emailInput="ngModel">
+          <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="alert">
+            <p *ngIf="emailInput.errors?.['required']">Email is required.</p>
+            <p *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</p>
+          </div>
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
-          <input type="password" id="password" [(ngModel)]="password" name="password" required>
+          <input type="password" id="password" [(ngModel)]="password" name="password" required #passwordInput="ngModel">
+          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="alert">
+            <p *ngIf="passwordInput.errors?.['required']">Password is required.</p>
+          </div>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn-login" (click)="login()">Login</button>
+          <button type="submit" class="btn-login">Login</button>
+        </div>
+        <div class="alert" *ngIf="error">
+          <p>Could not find user</p>
         </div>
       </form>
-      <div class="alert" *ngIf="error">
-        <p>Could not find user</p>
-      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="isLoggedIn">
-    <p>Welcome {{user.name}}</p>
+<div *ngIf="isLoggedIn" class="loggedIn">
+  <p>Welcome <span>{{ user?.name }}</span></p>
+  <button type="submit" class="btn-logout" (click)="logout()">Log out</button>
 </div>
