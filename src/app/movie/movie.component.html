@@ -1,6 +1,6 @@
 <section class="search-bar">
-    <form>
-      <input type="text" placeholder="Search title" id="tilteSearch" name="titleSearch" #titleSearch />
+    <form (ngSubmit)="searchMovie(titleSearch.value)">
+      <input type="text" placeholder="Search title" id="tilteSearch" name="titleSearch" #titleSearch/>
       <button class="primary" type="button" (click)="searchMovie(titleSearch.value)">Search</button>
     </form>
 </section>

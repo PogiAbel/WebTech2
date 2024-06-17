@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MovieTileComponent } from '../movie-tile/movie-tile.component';
 import { CommonModule } from '@angular/common';
 import { MovieData } from '../interfaces';
+import { FormsModule } from '@angular/forms';
 
 async function api<JSON>(url: string): Promise<JSON> {
   return fetch(url)
@@ -17,7 +18,7 @@ async function api<JSON>(url: string): Promise<JSON> {
 @Component({
   selector: 'app-movie',
   standalone: true,
-  imports: [MovieTileComponent,CommonModule],
+  imports: [MovieTileComponent,CommonModule, FormsModule],
   templateUrl: './movie.component.html',
   styleUrl: './movie.component.css',
 
