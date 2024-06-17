@@ -51,3 +51,7 @@ export interface Login{
   name: string ;
   email: string ;
 }
+
+export interface extComment extends Comment{
+  can_edit: boolean;
+}

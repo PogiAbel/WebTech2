@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieData, Comment } from '../interfaces';
+import { MovieData, Comment, extComment } from '../interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CommentTileComponent } from '../comment-tile/comment-tile.component';
@@ -39,7 +39,7 @@ async function postComment(http: HttpClient, movieId: string, userName: string,u
 })
 export class SingleMovieComponent implements OnInit{
   public movie!: MovieData;
-  public comments!: Comment[];
+  public comments: extComment[] = [];
   public loaded: boolean = false;
   public isLoggedIn: boolean = false;
   public newCommentText: string = '';
@@ -87,7 +87,19 @@ export class SingleMovieComponent implements OnInit{
   loadComments(){
     try {
       api<Comment[]>(`http://localhost:3000/comments?movie_id=${this.id}`).then(data => {
-        this.comments = data;
+        let bare: Comment[] = data;
+        for (let comment of bare) {
+          let ext: extComment = {
+            _id: comment._id,
+            name: comment.name,
+            email: comment.email,
+            movie_id: comment.movie_id,
+            text: comment.text,
+            date: comment.date,
+            can_edit: comment.email === this.user.email
+          };
+          this.comments.push(ext);
+        }
       });
     } catch (error) {
       console.log(error);

@@ -126,3 +126,10 @@ app.post('/comments', async (req, res) => {
     res.json({'error': error});
   }
 });
+
+app.post('/deleteComment', async (req, res) => {
+  let comment_id = req.query.comment_id;
+  let cid = new ObjectId(comment_id);
+  let response = await client.db("sample_mflix").collection("comments").deleteOne({_id: cid});
+  res.json(response);
+});
