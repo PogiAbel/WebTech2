@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Login } from '../interfaces';
+import exp from 'node:constants';
 
 async function api<JSON>(url: string): Promise<JSON> {
   return fetch(url)
@@ -50,7 +51,7 @@ export class LoginComponent {
         console.log(user);
         this.error = false;
         
-        this.cookieService.set('user', JSON.stringify(user));
+        this.cookieService.set('user', JSON.stringify(user), 1);
         this.getUser();
 
         this.isLoggedIn = true;
