@@ -84,6 +84,7 @@
     font-weight: 400;
   }
 
-
-
-  
+  .alert{
+    color: red;
+    font-size: 1rem;
+  }
