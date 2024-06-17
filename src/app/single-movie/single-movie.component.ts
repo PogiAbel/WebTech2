@@ -21,7 +21,7 @@ async function api<JSON>(url: string): Promise<JSON> {
 
 async function postComment(http: HttpClient, movieId: string, userName: string,userEmail:string, comment: string): Promise<any> {
   try {
-    const url = `http://localhost:3000/comments?movie_id=${movieId}&userName=${userName}&userEmail=${userEmail}&comment=${comment}`;
+    const url = `http://localhost:3000/comment?movie_id=${movieId}&userName=${userName}&userEmail=${userEmail}&comment=${comment}`;
     const response = await http.post<any>(url, {}).toPromise();
     return response;
   } catch (error) {

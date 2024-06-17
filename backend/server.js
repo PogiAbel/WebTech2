@@ -103,7 +103,7 @@ app.get('/user', async (req, res) => {
   }
 });
 
-app.post('/comments', async (req, res) => {
+app.post('/comment', async (req, res) => {
   try {
     let movie_id = req.query.movie_id;
     let user_id = req.query.user_id;
